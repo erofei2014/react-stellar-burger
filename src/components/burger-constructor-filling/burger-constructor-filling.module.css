@@ -1,0 +1,16 @@
+.flexible_elements {
+  max-height: 35vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.flexible_element {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

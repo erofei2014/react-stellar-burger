@@ -1,0 +1,40 @@
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  width: 600px;
+  box-sizing: border-box;
+}
+
+.ingredients {
+  width: 100%;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 16px;
+  padding: 0;
+}
+
+.flex_center_element {
+  display: flex;
+  align-items: center;
+}
+
+.inner_elements {
+  composes: flex_center_element;
+  justify-content: end;
+}
+
+.payment {
+  composes: flex_center_element;
+}
+
+.sum {
+  composes: flex_center_element;
+}
+
+.button {
+  width: 215px;
+  height: 64px;
+}
