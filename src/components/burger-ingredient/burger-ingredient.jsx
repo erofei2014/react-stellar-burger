@@ -1,3 +1,4 @@
+import React from "react";
 import PropTypes from 'prop-types';
 import { ingredientPropType } from '../../utils/prop-types';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -5,7 +6,7 @@ import styles from "./burger-ingredient.module.css";
 
 function BurgerIngredient({ ingredients, group, type }) {
   return (
-    <article className={styles.article} id={type}>
+    <React.Fragment className={styles.article} id={type}>
       <h2 className={`${styles.header} text text_type_main-medium mb-6 mt-10`}>{group}</h2>
       <ul className={`${styles.block_of_ingredients} pl-4`}>
         {ingredients.map((ingredient, index) => {
@@ -26,7 +27,7 @@ function BurgerIngredient({ ingredients, group, type }) {
           );
         })}
       </ul>
-    </article>
+    </React.Fragment>
   );  
 }
 

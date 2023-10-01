@@ -37,7 +37,7 @@ function BurgerConstructor({elements}) {
           />
         </li>
       </ul>
-      <footer className={`${styles.payment} mt-10 mr-4`}>
+      <div className={`${styles.payment} mt-10 mr-4`}>
         <div className={`${styles.sum} mr-10`}>
           <p className="text text_type_digits-medium mr-2">{sum}</p>
           <CurrencyIcon
@@ -45,7 +45,7 @@ function BurgerConstructor({elements}) {
           />
         </div>
         <Button htmlType="button" extraClass={styles.button}>Оформить заказ</Button>
-      </footer>
+      </div>
     </section>
   );  
 }
