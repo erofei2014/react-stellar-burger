@@ -1,0 +1,30 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+}
+
+.header {
+  align-self: stretch;
+  text-align: start;
+}
+
+.menu {
+  display: flex;
+}
+
+.ingredients {
+  max-height: 65vh;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  scrollbar-width: 8px;
+}
+
+.type {
+  width: 100%;
+}

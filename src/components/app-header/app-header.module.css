@@ -1,0 +1,35 @@
+.header {
+  background-color: #1C1C21;
+  padding: 16px 320px;
+}
+
+.menu {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+}
+
+.submenu {
+  display: flex;
+  align-items: center;
+  justify-items: flex-start;
+  justify-self: start;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.logo {
+  display: flex;
+  justify-self: center;
+  align-items: center;
+}
+
+.link {
+  display: flex;
+  text-decoration: none;
+  color: inherit;
+}
+
+.personal {
+  justify-self: end;
+}
