@@ -1,0 +1,35 @@
+.popup_window {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup_container {
+  position: absolute;
+  width: 720px;
+  background-color: #1C1C21;
+  border-radius: 40px;
+  z-index: 1;
+}
+
+.button {
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  right: 40px;
+  top: 60px;
+  cursor: pointer;
+}
+
+.header {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  height: 64px;
+  padding: 12px 0;
+}

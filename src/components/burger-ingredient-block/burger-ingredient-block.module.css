@@ -1,0 +1,18 @@
+.article {
+  position: relative;
+}
+
+.header {
+  position: sticky;
+  top: 16px;
+}
+
+.block_of_ingredients {
+  display: grid;
+  grid-template-columns: repeat(2, 272px);
+  list-style-type: none;
+  padding: 0 16px;
+  box-sizing: border-box;
+  width: 600px;
+  gap: 32px 24px;
+}
