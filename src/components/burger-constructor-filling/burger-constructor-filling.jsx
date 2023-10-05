@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { ingredientPropType } from '../../utils/prop-types';
 import styles from "./burger-constructor-filling.module.css";
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -25,7 +26,7 @@ function BurgerConstructorFilling({ elements }) {
 }
 
 BurgerConstructorFilling.propTypes = {
-  elements: ingredientPropType.isRequired,
-}
+  elements: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired
+};
 
 export default BurgerConstructorFilling;
