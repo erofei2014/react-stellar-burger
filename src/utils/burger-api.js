@@ -15,3 +15,19 @@ export const getIngredients = () => {
       return Promise.reject(data)
     });
 };
+
+export const getOrderNumber = (orderElements) => {
+  return fetch(`${apiLink}/orders`,
+  {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        ingredients: orderElements
+    })
+  })
+    .then(getResponseData)
+    .then(data => {
+      if(data.success === true) return data.order.number;
+      return Promise.reject(data)
+    });
+};

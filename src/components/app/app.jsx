@@ -4,6 +4,7 @@ import AppHeader from '../app-header/app-header.jsx';
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import { getIngredients } from "../../utils/burger-api";
+import { BurgerConstructorContext } from "../../services/burger-constructor-context";
 
 function App() {
   const [state, setState] = React.useState({
@@ -12,13 +13,18 @@ function App() {
     data: []
   });
 
+  const [orderList, setOrderList] = React.useState({
+    selectedElements: []
+  });
+
   React.useEffect(() => {
     setState({ ...state, isLoading: true });
     getIngredients()
-      .then(data => setState({ ...state, data: data, isLoading: false }))
-      .catch(e => {
-        setState({ ...state, hasError: true, isLoading: false });
-      });
+      .then(data => {
+        setState({ ...state, data: data, isLoading: false });
+        setOrderList({ selectedElements: data });
+      })
+      .catch(e => setState({ ...state, hasError: true, isLoading: false }));
   }, []);
 
   return (
@@ -31,10 +37,12 @@ function App() {
           !state.hasError &&
           state.data.length &&
         <>
-          <BurgerIngredients
-            ingredients={state.data}
-          />
-          <BurgerConstructor elements={state.data} />
+          <BurgerConstructorContext.Provider value={{orderList, setOrderList}}>
+            <BurgerIngredients
+              ingredients={state.data}
+            />
+            <BurgerConstructor />
+          </BurgerConstructorContext.Provider>
         </>}
       </main>
     </div>

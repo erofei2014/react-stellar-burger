@@ -1,11 +1,16 @@
+import React from "react";
 import PropTypes from 'prop-types';
 import styles from './burger-ingredient.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ingredientPropType } from "../../utils/prop-types";
+import { BurgerConstructorContext } from "../../services/burger-constructor-context";
 
 function BurgerIngredient({ingredientData, onClick, count}) {
+  const { orderList, setOrderList } = React.useContext(BurgerConstructorContext);
+
   const fillModal = (() => {
-    onClick(ingredientData);
+  //  onClick(ingredientData);
+    setOrderList({ selectedElements: [...orderList.selectedElements, ingredientData] });
   });
 
   return (
@@ -14,7 +19,7 @@ function BurgerIngredient({ingredientData, onClick, count}) {
         count={count}
         size="default"
       />
-      <img src={ingredientData.image} className="ml-4 mr-4"></img>
+      <img src={ingredientData.image} className="ml-4 mr-4" alt={ingredientData.name}></img>
       <div className={`${styles.price} mt-1 mb-1`}>
         <p className="text text_type_digits-default mr-2">{ingredientData.price}</p>
         <CurrencyIcon type="primary" />
