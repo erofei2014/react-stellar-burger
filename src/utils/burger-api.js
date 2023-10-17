@@ -1,33 +1,34 @@
-const apiLink = 'https://norma.nomoreparties.space/api';
+const BASE_URL = 'https://norma.nomoreparties.space/api/';
 
-const getResponseData = (res) => {
+const checkResponse = (res) => {
   if (res.ok) {
     return res.json();
   }
   return Promise.reject(`Ошибка: ${res.status}`);
 }
 
-export const getIngredients = () => {
-  return fetch(`${apiLink}/ingredients`)
-    .then(getResponseData)
-    .then(data => {
-      if(data?.success) return data.data;
-      return Promise.reject(data)
-    });
+const checkSuccess = (res) => {
+  if (res && res.success) {
+    return res;
+  }
+  return Promise.reject(`Ответ не success: ${res}`);
 };
 
-export const getOrderNumber = (orderElements) => {
-  return fetch(`${apiLink}/orders`,
+const request = (endpoint, options) => {
+  return fetch(`${BASE_URL}${endpoint}`, options)
+    .then(checkResponse)
+    .then(checkSuccess);
+};
+
+export const getIngredients = () => request('ingredients');
+
+export const getOrderNumber = (orderElements) => request(
+  'orders',
   {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-        ingredients: orderElements
+      'ingredients': orderElements
     })
-  })
-    .then(getResponseData)
-    .then(data => {
-      if(data.success === true) return data.order.number;
-      return Promise.reject(data)
-    });
-};
+  }
+);

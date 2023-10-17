@@ -6,7 +6,7 @@ import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import { BurgerConstructorContext } from "../../services/burger-constructor-context";
 import { getOrderNumber } from "../../utils/burger-api";
-import { getIngredients } from "../../utils/burger-api";
+import { useModal } from "../../hooks/useModal";
 
 const initialSum = { sum: 0 };
 const reset = {type: 'reset'};
@@ -28,15 +28,15 @@ function reducer(state, action) {
 
 function BurgerConstructor() {
   const [sumState, sumDispatcher] = React.useReducer(reducer, initialSum, undefined);
-  const [isModalOpened, openModal] = React.useState(false);
   const [orderNumber, setOrderNumber] = React.useState(null);
   const [order, setOrder] = React.useState([]);
 
   const { orderList, setOrderList } = React.useContext(BurgerConstructorContext);
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   const composeOrder = (() => {
     setOrder(() => {
-      let order = [];
+      const order = [];
       orderList.selectedElements.forEach((ingredient) => {
         order.push(ingredient._id);
       });
@@ -53,18 +53,15 @@ function BurgerConstructor() {
   }, [sumDispatcher, orderList]);
 
   const onButtonClick = (() => {
+    setOrderNumber('...');
+    openModal();
     getOrderNumber(order)
       .then(data => {
-        setOrderNumber(data);
-        openModal(true);
+        setOrderNumber(data.order.number);
       })
       .catch(e => {
-        setOrderNumber(null);
+        setOrderNumber('не удалось получить номер заказа');
       });
-  });
-
-  const closeModal = (() => {
-    openModal(false);
   });
 
   const bun = React.useMemo(() => orderList.selectedElements.find(element => element.type === 'bun'), [orderList.selectedElements]);
@@ -108,7 +105,7 @@ function BurgerConstructor() {
           <Button htmlType="button" extraClass={styles.button} onClick={onButtonClick}>Оформить заказ</Button>
         </div>
       </>}
-      {isModalOpened &&
+      {isModalOpen &&
       <Modal closeModal={closeModal}>
         <OrderDetails orderNumber={orderNumber} />
       </Modal>}

@@ -21,8 +21,8 @@ function App() {
     setState({ ...state, isLoading: true });
     getIngredients()
       .then(data => {
-        setState({ ...state, data: data, isLoading: false });
-        setOrderList({ selectedElements: data });
+        setState({ ...state, data: data.data, isLoading: false });
+        setOrderList({ selectedElements: data.data });
       })
       .catch(e => setState({ ...state, hasError: true, isLoading: false }));
   }, []);
@@ -36,14 +36,12 @@ function App() {
         {!state.isLoading &&
           !state.hasError &&
           state.data.length &&
-        <>
           <BurgerConstructorContext.Provider value={{orderList, setOrderList}}>
             <BurgerIngredients
               ingredients={state.data}
             />
             <BurgerConstructor />
-          </BurgerConstructorContext.Provider>
-        </>}
+          </BurgerConstructorContext.Provider>}
       </main>
     </div>
   );

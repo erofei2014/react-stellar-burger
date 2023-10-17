@@ -9,7 +9,7 @@ function BurgerIngredient({ingredientData, onClick, count}) {
   const { orderList, setOrderList } = React.useContext(BurgerConstructorContext);
 
   const fillModal = (() => {
-  //  onClick(ingredientData);
+    onClick(ingredientData);
     setOrderList({ selectedElements: [...orderList.selectedElements, ingredientData] });
   });
 
