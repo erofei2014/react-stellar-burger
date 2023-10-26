@@ -6,10 +6,13 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerIngredient from "../burger-ingredient-block/burger-ingredient-block";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
+import { useModal } from "../../hooks/useModal";
 
 function BurgerIngredients({ ingredients }) {
   const [current, setCurrent] = React.useState('bun');
   const [ingredientInfo, setIngredientData] = React.useState(null);
+
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   const onTypeClick = (tab) => {
     setCurrent(tab);
@@ -17,12 +20,14 @@ function BurgerIngredients({ ingredients }) {
     if (element) element.scrollIntoView({behavior: 'smooth'});
   }
   
-  const closeModal = (() => {
+  const emptyModal = (() => {
+    closeModal();
     setIngredientData(null);
   });
 
   const fillModal = ((data) => {
     setIngredientData(data);
+    openModal();
   });
 
   return (
@@ -44,8 +49,8 @@ function BurgerIngredients({ ingredients }) {
           <BurgerIngredient group="Начинки" type="main" ingredients={ingredients} fillModal={fillModal} />
         </li>
       </ul>   
-      {ingredientInfo &&
-      <Modal title="Детали ингредиента" closeModal={closeModal}>
+      {isModalOpen &&
+      <Modal title="Детали ингредиента" closeModal={emptyModal}>
         <IngredientDetails ingredientDetails={ingredientInfo} />
       </Modal>}
     </section>
