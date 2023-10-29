@@ -20,9 +20,9 @@ const request = (endpoint, options) => {
     .then(checkSuccess);
 };
 
-export const getIngredients = () => request('ingredients');
+export const getIngredientsRequest = () => request('ingredients');
 
-export const getOrderNumber = (orderElements) => request(
+export const getOrderNumberRequest = (orderElements) => request(
   'orders',
   {
     method: 'POST',
