@@ -2,9 +2,10 @@ import { useSelector } from 'react-redux';
 import styles from './order-details.module.css';
 import orderConfirmImage from '../../images/done.png';
 import Loader from '../loader/loader';
+import { getOrderDetails } from '../../services/selectors/order-details';
 
 function OrderDetails() {
-  const { orderNumber, orderNumberRequest, orderNumberFailed } = useSelector(store => store.orderDetails);
+  const { orderNumber, orderNumberRequest, orderNumberFailed } = useSelector(getOrderDetails);
 
   return (
     <div className={styles.popup}>

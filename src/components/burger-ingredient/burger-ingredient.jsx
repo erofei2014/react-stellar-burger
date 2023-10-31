@@ -5,9 +5,10 @@ import { useDrag } from 'react-dnd';
 import styles from './burger-ingredient.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ingredientPropType } from "../../utils/prop-types";
+import { getBurgerConstructor } from "../../services/selectors/burger-constructor";
 
 function BurgerIngredient({ingredientData, fillModal}) {
-  const { bun, ingredients } = useSelector(store => store.burgerConstructor);
+  const { bun, ingredients } = useSelector(getBurgerConstructor);
 
   const [{ opacity }, ref] = useDrag({
     type: 'ingredients',

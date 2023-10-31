@@ -10,10 +10,11 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import Loader from "../loader/loader";
 import { getIngredients } from "../../services/actions/burger-ingredients";
 import { FILL_INGREDIENT_DATA, EMPTY_INGREDIENT_DATA } from "../../services/actions/ingredient-details";
+import { getBurgerIngredients } from "../../services/selectors/burger-ingredients";
 
 
 function BurgerIngredients() {
-  const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector(state => state.burgerIngredients);
+  const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector(getBurgerIngredients);
   const { isModalOpen, openModal, closeModal } = useModal();
   const dispatch = useDispatch();
 

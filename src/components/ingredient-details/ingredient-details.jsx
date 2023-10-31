@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux';
 import styles from './ingredient-details.module.css';
+import { getIngredientDetails } from '../../services/selectors/ingredient-details';
 
 function IngredientDetails() {
-  const { ingredientDetails } = useSelector(store => store.ingredientDetails);
+  const { ingredientDetails } = useSelector(getIngredientDetails);
 
   return (
     <div className={styles.ingredient_container}>

@@ -11,11 +11,13 @@ import OrderDetails from "../order-details/order-details";
 import { getOrderNumber } from "../../services/actions/order-details";
 import { ADD_INGREDIENT, UPDATE_INGREDIENTS_LIST } from "../../services/actions/burger-constructor";
 import bunImage from '../../../src/images/bun.png';
+import { getBurgerConstructor } from "../../services/selectors/burger-constructor";
 
 function BurgerConstructor() {
   const uuid = uuidv4();
   const dispatch = useDispatch();
-  const { bun, ingredients } = useSelector(store => store.burgerConstructor);
+  const { bun, ingredients } = useSelector(getBurgerConstructor);
+
   const { isModalOpen, openModal, closeModal } = useModal();
 
   const compileOrder = () => {
@@ -40,7 +42,7 @@ function BurgerConstructor() {
 
   const [{ isHover }, dropTarget] = useDrop({
     accept: 'ingredients',
-    drop(item) {moveIngredient({...item, uuid: uuid })},
+    drop(item) {moveIngredient({...item, uuid })},
     collect: monitor => ({
       isHover: monitor.isOver()
     })
