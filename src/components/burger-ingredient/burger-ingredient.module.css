@@ -6,6 +6,7 @@
   height: 208px;
   position: relative;
   cursor: pointer;
+  background-color: transparent;
 }
 
 .price {

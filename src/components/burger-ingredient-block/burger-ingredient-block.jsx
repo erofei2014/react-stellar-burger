@@ -16,8 +16,7 @@ function BurgerIngredientBlock({ ingredients, group, type, fillModal }) {
             <BurgerIngredient
               ingredientData={ingredient}
               key={index}
-              onClick={fillModal}
-              count={1}
+              fillModal={fillModal}
             />
           );
         })}

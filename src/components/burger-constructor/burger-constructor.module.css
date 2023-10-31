@@ -16,14 +16,34 @@ section {
   padding: 0;
 }
 
+.flexible_elements {
+  max-height: 35vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%
+}
+
 .flex_center_element {
   display: flex;
   align-items: center;
 }
 
+.inner_elements_bun {
+  width: 100%;
+  list-style: none;
+}
+
 .inner_elements {
   composes: flex_center_element;
   justify-content: end;
+  width: 100%;
+  list-style: none;
+  cursor: grab;
 }
 
 .payment {
@@ -37,4 +57,22 @@ section {
 .button {
   width: 215px;
   height: 64px;
+}
+
+.onHover {
+  border: 1px solid #ccf;
+  border-radius: 55px;
+  opacity: .4;
+}
+
+.fillings_substutute {
+  margin-right: 16px;
+  width: 536px;
+  display: flex;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
+  background-color: #2f2f37;
+  align-self: end;
 }
