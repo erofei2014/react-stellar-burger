@@ -1,0 +1,18 @@
+.container {
+  width: 480px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: stretch;
+  gap: 24px;
+}
+
+.buttons_container {
+  display: flex;
+  justify-content: end;
+  gap: 20px;
+}
+
+.buttons_container_hidden {
+  visibility: hidden;
+}
