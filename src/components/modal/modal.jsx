@@ -26,7 +26,6 @@ function Modal({ children, title, closeModal }) {
     <div className={styles.popup_window}>
       <div className={styles.popup_container}>
         <button className={styles.button}><CloseIcon onClick={closeModal} /></button>
-        <h3 className={`${styles.header} text text_type_main-large`}>{title}</h3>
         {children}
       </div>
       <ModalOverlay closeModal={closeModal} />
@@ -37,7 +36,6 @@ function Modal({ children, title, closeModal }) {
 
 Modal.propTypes = {
   children: PropTypes.node.isRequired,
-  title: PropTypes.string,
   closeModal: PropTypes.func.isRequired
 };
 

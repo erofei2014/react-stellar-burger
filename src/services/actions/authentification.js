@@ -15,33 +15,45 @@ export const setUser = (user) => ({
 
 export const registerNewUser = ({ email, password, name }) => {
   return function(dispatch) {
-    postNewUser(email, password, name).then(res => {
-      localStorage.setItem("accessToken", res.accessToken);
-      localStorage.setItem("refreshToken", res.refreshToken);
-      dispatch(setUser(res.user));
-      dispatch(setAuthChecked(true));
-    });
+    postNewUser(email, password, name)
+      .then(res => {
+        localStorage.setItem("accessToken", res.accessToken);
+        localStorage.setItem("refreshToken", res.refreshToken);
+        dispatch(setUser(res.user));
+        dispatch(setAuthChecked(true));
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 };
 
 export const login = ({ email, password }) => {
   return function(dispatch) {
-    postLogin(email, password).then(res => {
-      localStorage.setItem("accessToken", res.accessToken);
-      localStorage.setItem("refreshToken", res.refreshToken);
-      dispatch(setUser(res.user));
-      dispatch(setAuthChecked(true));
-    });
+    postLogin(email, password)
+      .then(res => {
+        localStorage.setItem("accessToken", res.accessToken);
+        localStorage.setItem("refreshToken", res.refreshToken);
+        dispatch(setUser(res.user));
+        dispatch(setAuthChecked(true));
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 };
 
 export const logout = () => {
   return function(dispatch) {
-    return postLogout().then(res => {
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-      dispatch(setUser(null));
-    });
+    return postLogout()
+      .then(res => {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        dispatch(setUser(null));
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 };
 
@@ -50,15 +62,22 @@ export const fillProfile = () => {
     return getUserInfo()
       .then(res => {
         dispatch(setUser(res.user));
+      })
+      .catch(err => {
+        console.log(err);
       });
   }
 };
 
 export const updateProfile = ({ name, email, password }) => {
   return function(dispatch) {
-    return postUpdatedUserInfo(name, email, password).then(res => {
-      dispatch(setUser(res.user));
-    });
+    return postUpdatedUserInfo(name, email, password)
+      .then(res => {
+        dispatch(setUser(res.user));
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 };
 
