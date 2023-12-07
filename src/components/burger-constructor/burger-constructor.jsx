@@ -1,6 +1,7 @@
 import React, { useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
+import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 import { useModal } from "../../hooks/useModal";
 import styles from "./burger-constructor.module.css";
@@ -12,11 +13,14 @@ import { getOrderNumber } from "../../services/actions/order-details";
 import { ADD_INGREDIENT, UPDATE_INGREDIENTS_LIST } from "../../services/actions/burger-constructor";
 import bunImage from '../../../src/images/bun.png';
 import { getBurgerConstructor } from "../../services/selectors/burger-constructor";
+import { getAuthentification } from "../../services/selectors/authentification";
 
 function BurgerConstructor() {
+  const navigate = useNavigate();
   const uuid = uuidv4();
   const dispatch = useDispatch();
   const { bun, ingredients } = useSelector(getBurgerConstructor);
+  const { user } = useSelector(getAuthentification);
 
   const { isModalOpen, openModal, closeModal } = useModal();
 
@@ -27,6 +31,8 @@ function BurgerConstructor() {
   const setOrderNumber = () => {
     if (bun === null || !ingredients.length) {
       return;
+    } else if (!user) {
+      navigate('/login');
     } else {
       dispatch(getOrderNumber(compileOrder()));
       openModal();

@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  padding: 105px 100px 60px;
+  padding: 0 100px 60px;
 }
 
 .ingredient_details {
@@ -29,4 +29,18 @@
 .paragraph {
   padding: 0;
   margin: 0;
+}
+
+.header_modal {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  height: 64px;
+  padding: 12px 0;
+}
+
+.header_page {
+  width: 640px;
+  margin: 120px auto 0;
+  text-align: center;
 }

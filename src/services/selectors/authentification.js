@@ -1,0 +1,1 @@
+export const getAuthentification = store => store.authentification;

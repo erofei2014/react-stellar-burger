@@ -1,35 +1,74 @@
+import { Link, NavLink } from 'react-router-dom';
 import styles from "./app-header.module.css";
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 function AppHeader() {
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} mt-10`}>
       <nav className={styles.menu}>
         <ul className={styles.submenu}>
           <li className="pl-5 pr-5">
-            <a href="#" className={styles.link}>
-              <BurgerIcon />
-              <p className="text text_type_main-default ml-2">Конструктор</p>
-            </a>
+            <NavLink 
+              to="/"
+              className={styles.link}
+            >
+              {({isActive}) => (
+                <>
+                  <BurgerIcon
+                    type={isActive ? '' : 'secondary'}
+                  />
+                  <p
+                    className={isActive 
+                      ? 'text text_type_main-default ml-2' 
+                      : 'text text_type_main-default ml-2 text_color_inactive'}
+                  >Конструктор</p>                 
+                </>
+              )}
+            </NavLink>
           </li>
           <li className={` pl-5 pr-5 ml-2`}>
-            <a href="#" className={styles.link}>
-              <ListIcon
-                type="secondary"
-              />
-              <p className="text text_type_main-default text_color_inactive ml-2">Лента заказов</p>              
-            </a>
+            <NavLink 
+              to="/feed" 
+              className={styles.link}
+            >
+              {({isActive}) => (
+                <>
+                  <ListIcon
+                    type={isActive ? '' : 'secondary'}
+                  />
+                  <p
+                    className={isActive 
+                      ? 'text text_type_main-default ml-2' 
+                      : 'text text_type_main-default ml-2 text_color_inactive'}
+                  >Лента заказов</p>                 
+                </>
+              )}
+            </NavLink>
           </li>
         </ul>
-        <a href="#" className={styles.logo}>
+        <Link 
+          to="/" 
+          className={styles.logo}
+        >
           <Logo />
-        </a>
-        <a href="#" className={`${styles.link} ${styles.personal} pl-5 pr-5`}>
-          <ProfileIcon
-            type="secondary"
-          />
-          <p className="text text_type_main-default text_color_inactive ml-2">Личный кабинет</p>          
-        </a>
+        </Link>
+        <NavLink 
+          to="/profile" 
+          className={`${styles.link} ${styles.personal} pl-5 pr-5`}
+        >
+          {({isActive}) => (
+            <>
+              <ProfileIcon
+                type={isActive ? '' : 'secondary'}
+              />
+              <p 
+                className={isActive 
+                  ? 'text text_type_main-default ml-2' 
+                  : 'text text_type_main-default ml-2 text_color_inactive'}
+              >Личный кабинет</p>            
+            </>
+          )}
+        </NavLink>
       </nav>
     </header>
   );  

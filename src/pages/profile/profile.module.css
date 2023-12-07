@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  gap: 60px;
+  width: 1280px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  justify-content: start;
+  align-items: start;
+}
+
+.margin_top {
+  margin-top: 120px;
+}
+
+.menu {
+  max-width: 320px;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;  
+}
+
+.menu_element {
+  height: 64px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.active_link {
+  color: #F2F2F3;
+}
+
+.caption {
+  opacity: .4;
+}
+
+.button {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}

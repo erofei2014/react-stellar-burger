@@ -21,7 +21,7 @@ function OrderDetails() {
         </>
       </Loader>}      
       {orderNumber !== null && !orderNumberRequest && !orderNumberFailed &&
-      <p className={`${styles.order_number} text text_type_digits-large mt-30`}>{orderNumber}</p>}
+      <p className={`${styles.order_number} text text_type_digits-large mt-4`}>{orderNumber}</p>}
       <p className="text text_type_main-medium mt-8 mb-15">идентификатор заказа</p>
       <img src={orderConfirmImage} alt="заказ подтверждён" />
       <p className="text text_type_main-default mt-15">Ваш заказ начали готовить</p>

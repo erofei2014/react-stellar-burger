@@ -1,12 +1,16 @@
-import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import styles from './ingredient-details.module.css';
-import { getIngredientDetails } from '../../services/selectors/ingredient-details';
+import { ingredientPropType } from '../../utils/prop-types';
 
-function IngredientDetails() {
-  const { ingredientDetails } = useSelector(getIngredientDetails);
+function IngredientDetails({ ingredientDetails }) {
+  const location = useLocation();
+  const background = location.state && location.state.background;
+
+  const headerClass = !background ? `${styles.header_page} text text_type_main-large` : `${styles.header_modal} text text_type_main-large`;
 
   return (
     <div className={styles.ingredient_container}>
+      <h3 className={headerClass}>Детали ингредиента</h3>
       <img src={ingredientDetails.image_large} alt={ingredientDetails.name} />
       <h4 className={`${styles.ingredient_title} text text_type_main-medium mt-4 mb-8`}>{ingredientDetails.name}</h4>
       <ul className={`${styles.ingredient_details} text text_color_inactive`}>
@@ -29,6 +33,10 @@ function IngredientDetails() {
       </ul>
   </div>
   );
-}
+};
+
+IngredientDetails.propTypes = {
+  ingredientDetails: ingredientPropType.isRequired
+};
 
 export default IngredientDetails;

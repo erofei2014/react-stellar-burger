@@ -4,7 +4,7 @@ import { ingredientPropType } from '../../utils/prop-types';
 import styles from "./burger-ingredient-block.module.css";
 import BurgerIngredient from "../burger-ingredient/burger-ingredient";
 
-function BurgerIngredientBlock({ ingredients, group, type, fillModal }) {
+function BurgerIngredientBlock({ ingredients, group, type }) {
 
   return (
     <div className={styles.article} id={type}>
@@ -16,7 +16,6 @@ function BurgerIngredientBlock({ ingredients, group, type, fillModal }) {
             <BurgerIngredient
               ingredientData={ingredient}
               key={index}
-              fillModal={fillModal}
             />
           );
         })}
@@ -28,8 +27,7 @@ function BurgerIngredientBlock({ ingredients, group, type, fillModal }) {
 BurgerIngredientBlock.propTypes = {
   ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
   group: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  fillModal: PropTypes.func.isRequired
+  type: PropTypes.string.isRequired
 };
 
 export default BurgerIngredientBlock;
