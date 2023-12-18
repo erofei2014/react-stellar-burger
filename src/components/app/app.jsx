@@ -14,6 +14,8 @@ import ProfileUpdate from "../../pages/profile/profile-update";
 import ProfileOrderHistory from "../../pages/profile/profile-order-history";
 import Ingredient from '../../pages/ingredient';
 import Modal from '../modal/modal';
+import OrderFeed from "../../pages/order-feed";
+import OrderInformation from "../../pages/order-information";
 import NotFound404 from '../../pages/not-found';
 import { OnlyAuth, OnlyUnAuth } from "../protected-route";
 import { checkUserAuth } from "../../services/actions/authentification";
@@ -45,10 +47,13 @@ function App() {
             <Route path="/register" element={<OnlyUnAuth component={<Register />} />} />
             <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPassword />} />} />
             <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPassword />} />} />
+            <Route path="/feed" element={<OrderFeed />} />
+            <Route path="/feed/:number" element={<OrderInformation />} />
             <Route path="/profile" element={<OnlyAuth component={<Profile />} />}>
               <Route path="" element={<OnlyAuth component={<ProfileUpdate />} />} />
               <Route path="orders" element={<OnlyAuth component={<ProfileOrderHistory />} />} />
             </Route>
+            <Route path="/profile/orders/:number" element={<OnlyAuth component={<OrderInformation />} />} />
             <Route path="/ingredients/:id" element={<Ingredient />} />
             <Route path="*" element={<NotFound404 />} />
           </Routes>    
@@ -60,6 +65,22 @@ function App() {
                 element={
                   <Modal closeModal={handleModalClose}>
                     <Ingredient />
+                  </Modal>
+                }
+              />
+              <Route
+                path="/feed/:number"
+                element={
+                  <Modal closeModal={handleModalClose}>
+                    <OrderInformation />
+                  </Modal>
+                }
+              />
+              <Route
+                path="/profile/orders/:number"
+                element={
+                  <Modal closeModal={handleModalClose}>
+                    <OnlyAuth component={<OrderInformation />} />
                   </Modal>
                 }
               />

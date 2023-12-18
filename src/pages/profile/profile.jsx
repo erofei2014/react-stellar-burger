@@ -1,11 +1,13 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import styles from './profile.module.css';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { logout } from '../../services/actions/authentification';
 
 function Profile() {
   const dispatch = useDispatch();
+
+  const location = useLocation();
 
   const onClick = useCallback(e => {
     dispatch(logout());
@@ -41,7 +43,12 @@ function Profile() {
             </button>
           </li>
         </ul>
-        <p className={`text text_type_main-default text_color_inactive mt-20 ${styles.caption}`}>В этом разделе вы можете <br/> изменить свои персональные данные</p>
+        <>
+          {location.pathname === '/profile' &&
+            <p className={`text text_type_main-default text_color_inactive mt-20 ${styles.caption}`}>В этом разделе вы можете <br/> изменить свои персональные данные</p>}
+          {location.pathname === '/profile/orders' &&
+            <p className={`text text_type_main-default text_color_inactive mt-20 ${styles.caption}`}>В этом разделе вы можете <br/> просмотреть свою историю заказов</p>}        
+        </>
       </nav>
       <Outlet />
     </div>

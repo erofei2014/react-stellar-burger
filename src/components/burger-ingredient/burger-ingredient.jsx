@@ -47,7 +47,7 @@ function BurgerIngredient({ingredientData}) {
         />}
         <img src={ingredientData.image} className="ml-4 mr-4" alt={ingredientData.name}></img>
         <div className={`${styles.price} mt-1 mb-1`}>
-          <p className="text text_type_digits-default mr-2">{ingredientData.price}</p>
+          <p className="text text_type_digits-default mr-2">{ingredientData.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</p>
           <CurrencyIcon type="primary" />
         </div>
         <p className={`${styles.ingredient_name} text text_type_main-default`}>{ingredientData.name}</p>

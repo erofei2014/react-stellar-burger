@@ -128,7 +128,7 @@ function BurgerConstructor() {
       </ul>
       <div className={`${styles.payment} mt-10 mr-4`}>
         <div className={`${styles.sum} mr-10`}>
-          <p className="text text_type_digits-medium mr-2">{totalPrice}</p>
+          <p className="text text_type_digits-medium mr-2">{totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</p>
           <CurrencyIcon
             type="primary"
           />

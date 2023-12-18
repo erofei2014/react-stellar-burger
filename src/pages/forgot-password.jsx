@@ -32,6 +32,6 @@ function ForgotPassword() {
       <p className="text text_type_main-default text_color_inactive mt-20">Вспомнили пароль?<Link to='/login' className={`${styles.link} ml-2`}>Войти</Link></p>
     </form>
   );
-}
+};
 
 export default ForgotPassword;

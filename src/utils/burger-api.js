@@ -53,15 +53,26 @@ export const fetchWithRefresh = async (endpoint, options) => {
 
 export const getIngredientsRequest = () => request('ingredients');
 
-export const getOrderNumberRequest = (orderElements) => request(
-  'orders',
-  {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      'token': localStorage.getItem("refreshToken"),
-      'ingredients': orderElements
-    })
+export const getOrderNumberRequest = (orderElements) => {
+  return fetchWithRefresh('orders',
+    {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem('accessToken')
+      },
+      body: JSON.stringify({
+        'ingredients': orderElements
+      })
+    }
+  );
+};
+
+export const getOrderInformationRequest = (orderNumber) => request(
+  `orders/${orderNumber}`,
+  { 
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' }
   }
 );
 
