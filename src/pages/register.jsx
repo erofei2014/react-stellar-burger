@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useForm } from '../hooks/useForm';
 import { registerNewUser } from '../services/actions/authentification';
+import { PATH_LOGIN } from '../components/app/app';
 
 function Register() {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ function Register() {
         onChange={onChange}
       />
       <Button htmlType="submit" extraClass="mt-6">Зарегистрироваться</Button>
-      <p className="text text_type_main-default text_color_inactive mt-20">Уже зарегистрированы?<Link to='/login' className={`${styles.link} ml-2`}>Войти</Link></p>
+      <p className="text text_type_main-default text_color_inactive mt-20">Уже зарегистрированы?<Link to={PATH_LOGIN} className={`${styles.link} ml-2`}>Войти</Link></p>
     </form>
   );
 }

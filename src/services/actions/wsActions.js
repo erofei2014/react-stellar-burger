@@ -1,60 +1,25 @@
-export const WS_CONNECTION_START_ALL_ORDERS = 'WS_CONNECTION_START_ALL_ORDERS';
-export const WS_CONNECTION_SUCCESS_ALL_ORDERS = 'WS_CONNECTION_SUCCESS_ALL_ORDERS';
-export const WS_CONNECTION_ERROR_ALL_ORDERS = 'WS_CONNECTION_ERROR_ALL_ORDERS';
-export const WS_CONNECTION_CLOSED_ALL_ORDERS = 'WS_CONNECTION_CLOSED_ALL_ORDERS';
-export const WS_GET_ALL_ORDERS = 'WS_GET_ALL_ORDERS';
-export const WS_CONNECTION_START_USER_ORDERS = 'WS_CONNECTION_START_USER_ORDERS';
-export const WS_CONNECTION_SUCCESS_USER_ORDERS = 'WS_CONNECTION_SUCCESS_USER_ORDERS';
-export const WS_CONNECTION_ERROR_USER_ORDERS = 'WS_CONNECTION_ERROR_USER_ORDERS';
-export const WS_CONNECTION_CLOSED_USER_ORDERS = 'WS_CONNECTION_CLOSED_USER_ORDERS';
-export const WS_GET_USER_ORDERS = 'WS_GET_USER_ORDERS';
+export const ALL_ORDERS_WS_CONNECTION_START = 'ALL_ORDERS_WS_CONNECTION_START';
+export const ALL_ORDERS_WS_CONNECTION_SUCCESS = 'ALL_ORDERS_WS_CONNECTION_SUCCESS';
+export const ALL_ORDERS_WS_CONNECTION_ERROR = 'ALL_ORDERS_WS_CONNECTION_ERROR';
+export const ALL_ORDERS_WS_CONNECTION_CLOSE = 'ALL_ORDERS_WS_CONNECTION_CLOSE';
+export const ALL_ORDERS_WS_CONNECTION_CLOSED = 'ALL_ORDERS_WS_CONNECTION_CLOSED';
+export const ALL_ORDERS_WS_GET_ORDERS = 'ALL_ORDERS_WS_GET_ORDERS';
 
-export const wsConnectionSuccessAllOrders = () => {
+export const USER_ORDERS_WS_CONNECTION_START = 'USER_ORDERS_WS_CONNECTION_START';
+export const USER_ORDERS_WS_CONNECTION_SUCCESS = 'USER_ORDERS_WS_CONNECTION_SUCCESS';
+export const USER_ORDERS_WS_CONNECTION_ERROR = 'USER_ORDERS_WS_CONNECTION_ERROR';
+export const USER_ORDERS_WS_CONNECTION_CLOSE = 'USER_ORDERS_WS_CONNECTION_CLOSE';
+export const USER_ORDERS_WS_CONNECTION_CLOSED = 'USER_ORDERS_WS_CONNECTION_CLOSED';
+export const USER_ORDERS_WS_GET_ORDERS = 'USER_ORDERS_WS_GET_ORDERS';
+
+export const allOrdersWsGetOrders = () => {
   return {
-    type: WS_CONNECTION_SUCCESS_ALL_ORDERS
+    type: ALL_ORDERS_WS_GET_ORDERS
   };
 };
 
-export const wsConnectionErrorAllOrders = () => {
+export const userOrdersWsGetOrders = () => {
   return {
-    type: WS_CONNECTION_ERROR_ALL_ORDERS
-  };
-};
-
-export const wsConnectionClosedAllOrders = () => {
-  return {
-    type: WS_CONNECTION_CLOSED_ALL_ORDERS
-  };
-};
-
-export const wsGetAllOrders = () => {
-  return {
-    type: WS_GET_ALL_ORDERS
-  };
-};
-
-/* ----------------------------------- */
-
-export const wsConnectionSuccessUserOrders = () => {
-  return {
-    type: WS_CONNECTION_SUCCESS_USER_ORDERS
-  };
-};
-
-export const wsConnectionErrorUserOrders = () => {
-  return {
-    type: WS_CONNECTION_ERROR_USER_ORDERS
-  };
-};
-
-export const wsConnectionClosedUserOrders = () => {
-  return {
-    type: WS_CONNECTION_CLOSED_USER_ORDERS
-  };
-};
-
-export const wsGetUserOrders = () => {
-  return {
-    type: WS_GET_USER_ORDERS
+    type: USER_ORDERS_WS_GET_ORDERS
   };
 };

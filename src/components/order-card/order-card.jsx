@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import styles from './order-card.module.css';
 import { FormattedDate, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getBurgerIngredients } from '../../services/selectors/burger-ingredients';
+import { checkOrderStatus } from '../../utils/utils';
 
 function OrderCard({ order }) {
   const location = useLocation();
@@ -13,16 +14,7 @@ function OrderCard({ order }) {
   const { ingredients } = useSelector(getBurgerIngredients);
 
   const orderStatus = useMemo(() => {
-    switch (order.status) {
-      case 'done':
-        return 'Выполнен';
-      case 'pending':
-        return 'Готовится';
-      case 'created':
-        return 'Создан';
-      default:
-        return 'Статус неизвестен';
-    }
+    return checkOrderStatus(order.status);
   }, [order]);
 
   const conatainerClass = !background ? styles.container_page : styles.container_modal;

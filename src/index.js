@@ -8,38 +8,38 @@ import { compose, legacy_createStore as createStore, applyMiddleware } from 'red
 import { Provider } from 'react-redux';
 import { rootReducer } from './services/reducers/index';
 import thunk from 'redux-thunk';
-import { socketMiddlewareAllOrders } from "./services/middleware/socketMiddlewareAllOrders";
-import { socketMiddlewareUserOrders } from "./services/middleware/socketMiddlewareUserOrders";
+import { socketMiddleware } from "./services/middleware/socketMiddleware";
 import {
-  WS_CONNECTION_START_ALL_ORDERS,
-  WS_CONNECTION_ERROR_ALL_ORDERS,
-  WS_CONNECTION_CLOSED_ALL_ORDERS,
-  WS_CONNECTION_SUCCESS_ALL_ORDERS,
-  WS_GET_ALL_ORDERS,
-  WS_CONNECTION_START_USER_ORDERS,
-  WS_CONNECTION_ERROR_USER_ORDERS,
-  WS_CONNECTION_CLOSED_USER_ORDERS,
-  WS_CONNECTION_SUCCESS_USER_ORDERS,
-  WS_GET_USER_ORDERS
+  ALL_ORDERS_WS_CONNECTION_START,
+  ALL_ORDERS_WS_CONNECTION_ERROR,
+  ALL_ORDERS_WS_CONNECTION_CLOSE,
+  ALL_ORDERS_WS_CONNECTION_CLOSED,
+  ALL_ORDERS_WS_CONNECTION_SUCCESS,
+  ALL_ORDERS_WS_GET_ORDERS,
+  USER_ORDERS_WS_CONNECTION_START,
+  USER_ORDERS_WS_CONNECTION_ERROR,
+  USER_ORDERS_WS_CONNECTION_CLOSE,
+  USER_ORDERS_WS_CONNECTION_CLOSED,
+  USER_ORDERS_WS_CONNECTION_SUCCESS,
+  USER_ORDERS_WS_GET_ORDERS
 } from './services/actions/wsActions';
 
-const wsUrlAllOrders = 'wss://norma.nomoreparties.space/orders/all';
-const wsUrlUserOrders = 'wss://norma.nomoreparties.space/orders';
-
-const wsActionsAllOrders = {
-  wsInit: WS_CONNECTION_START_ALL_ORDERS,
-  onOpen: WS_CONNECTION_SUCCESS_ALL_ORDERS,
-  onError: WS_CONNECTION_ERROR_ALL_ORDERS,
-  onClose: WS_CONNECTION_CLOSED_ALL_ORDERS,
-  onGetOrders: WS_GET_ALL_ORDERS
+const allOrdersWsActions = {
+  wsInit: ALL_ORDERS_WS_CONNECTION_START,
+  wsClose: ALL_ORDERS_WS_CONNECTION_CLOSE,
+  onOpen: ALL_ORDERS_WS_CONNECTION_SUCCESS,
+  onError: ALL_ORDERS_WS_CONNECTION_ERROR,
+  onClose: ALL_ORDERS_WS_CONNECTION_CLOSED,
+  onGetOrders: ALL_ORDERS_WS_GET_ORDERS
 };
 
-const wsActionsUserOrders = {
-  wsInit: WS_CONNECTION_START_USER_ORDERS,
-  onOpen: WS_CONNECTION_SUCCESS_USER_ORDERS,
-  onError: WS_CONNECTION_ERROR_USER_ORDERS,
-  onClose: WS_CONNECTION_CLOSED_USER_ORDERS,
-  onGetOrders: WS_GET_USER_ORDERS
+const userOrdersWsActions = {
+  wsInit: USER_ORDERS_WS_CONNECTION_START,
+  wsClose: USER_ORDERS_WS_CONNECTION_CLOSE,
+  onOpen: USER_ORDERS_WS_CONNECTION_SUCCESS,
+  onError: USER_ORDERS_WS_CONNECTION_ERROR,
+  onClose: USER_ORDERS_WS_CONNECTION_CLOSED,
+  onGetOrders: USER_ORDERS_WS_GET_ORDERS
 };
 
 const composeEnhancers =
@@ -49,8 +49,8 @@ const composeEnhancers =
 
 const enhancer = composeEnhancers(applyMiddleware(
   thunk, 
-  socketMiddlewareAllOrders(wsUrlAllOrders, wsActionsAllOrders), 
-  socketMiddlewareUserOrders(wsUrlUserOrders, wsActionsUserOrders)
+  socketMiddleware(allOrdersWsActions),
+  socketMiddleware(userOrdersWsActions)
 ));
 
 const store = createStore(rootReducer, enhancer);

@@ -1,70 +1,78 @@
 import {
-  WS_CONNECTION_SUCCESS_ALL_ORDERS,
-  WS_CONNECTION_ERROR_ALL_ORDERS,
-  WS_CONNECTION_CLOSED_ALL_ORDERS,
-  WS_GET_ALL_ORDERS,
-  WS_CONNECTION_SUCCESS_USER_ORDERS,
-  WS_CONNECTION_ERROR_USER_ORDERS,
-  WS_CONNECTION_CLOSED_USER_ORDERS,
-  WS_GET_USER_ORDERS
+  ALL_ORDERS_WS_CONNECTION_SUCCESS,
+  ALL_ORDERS_WS_CONNECTION_ERROR,
+  ALL_ORDERS_WS_CONNECTION_CLOSED,
+  ALL_ORDERS_WS_GET_ORDERS,
+  USER_ORDERS_WS_CONNECTION_SUCCESS,
+  USER_ORDERS_WS_CONNECTION_ERROR,
+  USER_ORDERS_WS_CONNECTION_CLOSED,
+  USER_ORDERS_WS_GET_ORDERS
 } from '../actions/wsActions';
 
 const initialState = {
-  wsConnectedAllOrders: false,
-  wsConnectedUserOrders: false,
+  allOrdersWsConnected: false,
+  userOrdersWsConnected: false,
 
-  allOrders: {},
-  userOrders: {}
+  totalOrders: null,
+  totalToday: null,
+  allOrders: [],
+  userOrders: []
 };
 
 export const wsReducer = (state = initialState, action) => {
   switch(action.type) {
-    case WS_CONNECTION_SUCCESS_ALL_ORDERS: {
+    case ALL_ORDERS_WS_CONNECTION_SUCCESS: {
       return {
         ...state,
-        wsConnectedAllOrders: true
+        allOrdersWsConnected: true
       }
     }
-    case WS_CONNECTION_ERROR_ALL_ORDERS: {
+    case USER_ORDERS_WS_CONNECTION_SUCCESS: {
       return {
         ...state,
-        wsConnectedAllOrders: false
+        userOrdersWsConnected: true
       }
     }
-    case WS_CONNECTION_CLOSED_ALL_ORDERS: {
+    case ALL_ORDERS_WS_CONNECTION_ERROR: {
       return {
         ...state,
-        wsConnectedAllOrders: false
+        allOrdersWsConnected: false
       }
     }
-    case WS_GET_ALL_ORDERS: {
+    case USER_ORDERS_WS_CONNECTION_ERROR: {
       return {
         ...state,
-        allOrders: action.payload
+        userOrdersWsConnected: false
       }
     }
-    case WS_CONNECTION_SUCCESS_USER_ORDERS: {
+    case ALL_ORDERS_WS_CONNECTION_CLOSED: {
       return {
         ...state,
-        wsConnectedUserOrders: true
+        totalOrders: null,
+        totalToday: null,
+        allOrders: [],
+        allOrdersWsConnected: false
       }
     }
-    case WS_CONNECTION_ERROR_USER_ORDERS: {
+    case USER_ORDERS_WS_CONNECTION_CLOSED: {
       return {
         ...state,
-        wsConnectedUserOrders: false
+        userOrders: [],
+        userOrdersWsConnected: false
       }
     }
-    case WS_CONNECTION_CLOSED_USER_ORDERS: {
+    case ALL_ORDERS_WS_GET_ORDERS: {
       return {
         ...state,
-        wsConnectedUserOrders: false
+        totalOrders: action.payload.total,
+        totalToday: action.payload.totalToday,
+        allOrders: action.payload.orders
       }
     }
-    case WS_GET_USER_ORDERS: {
+    case USER_ORDERS_WS_GET_ORDERS: {
       return {
         ...state,
-        userOrders: action.payload
+        userOrders: action.payload.orders
       }
     }
     default: {

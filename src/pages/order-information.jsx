@@ -13,26 +13,20 @@ function OrderInformation() {
 
   const { number } = useParams();
 
-  const { allOrders, userOrders } = useSelector(getWsConnection);
+  const { userOrders, allOrders } = useSelector(getWsConnection);
   const { orderInformation, orderInformationRequest, orderInformationFailed } = useSelector(getOrderDetails);
 
   const checkWsHasOrder = useMemo(() => {
-    if((Object.keys(allOrders).length !== 0 && allOrders.orders.some(order => order.number === Number(number))) ||
-       (Object.keys(userOrders).length !== 0 && userOrders.orders.some(order => order.number === Number(number)))) {
+    if(allOrders.some(order => order.number === Number(number)) || userOrders.some(order => order.number === Number(number))) {
       return true;
     } else {
       return false;
     }
   }, []);
 
-
-  const orderInfo = useMemo(() => {
+  const orderInformationWs = useMemo(() => {
     if(checkWsHasOrder) {
-      if(Object.keys(allOrders).length !== 0 && allOrders.orders.some(order => order.number === Number(number))) {
-        return allOrders.orders.find(order => order.number === Number(number));
-      } else {
-        return userOrders.orders.find(order => order.number === Number(number));
-      }
+        return allOrders.find(order => order.number === Number(number)) || userOrders.find(order => order.number === Number(number));
     }
   }, []);
 
@@ -57,7 +51,7 @@ function OrderInformation() {
       {!checkWsHasOrder && !orderInformationRequest && !orderInformationFailed && Object.keys(orderInformation).length !== 0 &&
         <OrderCard order={orderInformation} />}
       {checkWsHasOrder &&
-        <OrderCard order={orderInfo} />
+        <OrderCard order={orderInformationWs} />
       }
     </>
   );

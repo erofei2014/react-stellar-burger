@@ -1,27 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 import styles from './feed.module.css';
 import OrderPreview from '../order-preview/order-preview';
-import { getWsConnection } from '../../services/selectors/ws-selector';
 
-
-function Feed({ isProfile }) {
-  const { allOrders, userOrders } = useSelector(getWsConnection);
+function Feed({ showStatus, orders }) {
 
   return(
     <section className={styles.section}>
-      <ul className={`${styles.orders} ${isProfile && styles.orders_user} custom-scroll`}>
-        {!isProfile &&
-        allOrders.orders.map((order, index) => {
+      <ul className={`${styles.orders} ${showStatus && styles.orders_user} custom-scroll`}>
+        {orders.map((order, index) => {
           return (
-            <OrderPreview key={index} order={order} showStatus={false} />
-          );
-        })}
-        {isProfile &&
-        userOrders.orders.map((order, index) => {
-          return (
-            <OrderPreview key={index} order={order} showStatus={true} />
+            <OrderPreview key={index} order={order} showStatus={showStatus} />
           );
         })}
       </ul>
@@ -29,9 +18,9 @@ function Feed({ isProfile }) {
   );
 };
 
-
 Feed.propTypes = {
-  isProfile: PropTypes.bool.isRequired
+  showStatus: PropTypes.bool.isRequired,
+  orders: PropTypes.array.isRequired
 };
 
 export default Feed;

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 import { getAuthentification } from "../services/selectors/authentification";
+import { PATH_LOGIN, PATH_HOME } from './app/app';
 
 const Protected = ({ onlyUnAuth = false, component }) => {
   const { isAuthChecked, user } = useSelector(getAuthentification);
@@ -12,12 +13,12 @@ const Protected = ({ onlyUnAuth = false, component }) => {
   }
 
   if(onlyUnAuth && user) {
-    const { from } = location.state || { from: { pathname: "/" } };
+    const { from } = location.state || { from: { pathname: PATH_HOME } };
     return <Navigate to={from} />;
   }
 
   if(!onlyUnAuth && !user) {
-    return <Navigate to='/login' state={{ from: location }} />;
+    return <Navigate to={PATH_LOGIN} state={{ from: location }} />;
   }
 
   return component;

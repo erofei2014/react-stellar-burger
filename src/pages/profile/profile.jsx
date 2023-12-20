@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import styles from './profile.module.css';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { logout } from '../../services/actions/authentification';
+import { PATH_PROFILE, PATH_PROFILE_FEED } from '../../components/app/app';
 
 function Profile() {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ function Profile() {
         <ul className={styles.list}>
           <li className={styles.menu_element}>
             <NavLink
-              to="/profile" end
+              to={PATH_PROFILE} end
               className={({isActive}) => isActive 
                 ? `text text_type_main-medium ${styles.link} ${styles.active_link}` 
                 : `text text_type_main-medium text_color_inactive ${styles.link}`}
@@ -28,7 +29,7 @@ function Profile() {
           </li>
           <li className={styles.menu_element}>
             <NavLink
-              to="orders"
+              to={PATH_PROFILE_FEED}
               className={({isActive}) => isActive 
                 ? `text text_type_main-medium ${styles.link} ${styles.active_link}` 
                 : `text text_type_main-medium text_color_inactive ${styles.link}`}       
@@ -44,9 +45,9 @@ function Profile() {
           </li>
         </ul>
         <>
-          {location.pathname === '/profile' &&
+          {location.pathname === PATH_PROFILE &&
             <p className={`text text_type_main-default text_color_inactive mt-20 ${styles.caption}`}>В этом разделе вы можете <br/> изменить свои персональные данные</p>}
-          {location.pathname === '/profile/orders' &&
+          {location.pathname === `${PATH_PROFILE}/${PATH_PROFILE_FEED}` &&
             <p className={`text text_type_main-default text_color_inactive mt-20 ${styles.caption}`}>В этом разделе вы можете <br/> просмотреть свою историю заказов</p>}        
         </>
       </nav>

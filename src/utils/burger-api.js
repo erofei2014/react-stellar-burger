@@ -1,4 +1,6 @@
 const BASE_URL = 'https://norma.nomoreparties.space/api/';
+export const WS_URL_ALL_ORDERS = 'wss://norma.nomoreparties.space/orders/all';
+export const WS_URL_USER_ORDERS = 'wss://norma.nomoreparties.space/orders';
 
 const checkResponse = (res) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
@@ -49,6 +51,18 @@ export const fetchWithRefresh = async (endpoint, options) => {
       return Promise.reject(err);
     }
   }
+};
+
+export const wsWithRefresh = async () => {
+  const refreshData = await refreshToken();
+  if (!refreshData.success) {
+    return Promise.reject(refreshData);
+  }
+
+  localStorage.setItem("refreshToken", refreshData.refreshToken);
+  localStorage.setItem("accessToken", refreshData.accessToken);
+
+  return `${WS_URL_USER_ORDERS}?token=${refreshData.accessToken.split(' ')[1]}`;
 };
 
 export const getIngredientsRequest = () => request('ingredients');

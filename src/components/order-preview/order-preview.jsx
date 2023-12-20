@@ -1,28 +1,22 @@
-import React, {useMemo} from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import styles from './order-preview.module.css';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useLocation } from 'react-router-dom';
 import { getBurgerIngredients } from '../../services/selectors/burger-ingredients';
+import { checkOrderStatus } from '../../utils/utils';
 
 function OrderPreview({ order, showStatus }) {
   const location = useLocation();
   const { ingredients } = useSelector(getBurgerIngredients);
 
   const orderStatus = useMemo(() => {
-    switch (order.status) {
-      case 'done':
-        return 'Выполнен';
-      case 'pending':
-        return 'Готовится';
-      case 'created':
-        return 'Создан';
-      default:
-        return 'Статус неизвестен';
-    }
+    return checkOrderStatus(order.status);
   }, [order]);
 
+  const maxVisibleElements = 5;
+  
   const orderStatusClass = order.status === 'done' ? `text text_type_main-default mt-2 ${styles.done}` : 'text text_type_main-default mt-2';
 
   const isAllIngredientsAuthentic = useMemo(() => {
@@ -31,9 +25,11 @@ function OrderPreview({ order, showStatus }) {
     });
   }, [ingredients, order]);
 
+  const isOrderValid = order._id && order.ingredients.length && isAllIngredientsAuthentic && order.number && order.createdAt && order.name && order.status;
+
   return(
     <li>
-      { order._id && order.ingredients.length && isAllIngredientsAuthentic && order.number && order.createdAt && order.name && order.status &&
+      { isOrderValid &&
       <Link 
         className={styles.order}
         to={`${order.number}`}
@@ -53,48 +49,23 @@ function OrderPreview({ order, showStatus }) {
         </div>
         <div className={styles.content}>
           <ul className={styles.ingredients}>
-            {order.ingredients.length < 6
-              ? (order.ingredients.map((ingredient, index) => {
-                  return (
-                    <li 
-                      key={index} 
-                      className={styles.image} 
-                      style={{
-                        backgroundImage: `url(${ingredients.find(item => item._id === ingredient).image})`,
-                        zIndex: 1000 - index
-                      }}
-                    >
-                    </li>          
-                  );
-                }))
-            : (order.ingredients.slice(0, 6).map((ingredient, index) => {
+            {order.ingredients.slice(0, maxVisibleElements + 1).map((ingredient, index) => {
                 return (
-                  <>
-                  {index < 5 &&
-                    <li 
+                  <li 
                     key={index} 
                     className={styles.image} 
                     style={{
                       backgroundImage: `url(${ingredients.find(item => item._id === ingredient).image})`,
                       zIndex: 1000 - index
                     }}
-                    >
-                    </li>}
-                  {index === 5 &&
-                    <li 
-                    key={index} 
-                    className={styles.image} 
-                    style={{
-                      backgroundImage: `url(${ingredients.find(item => item._id === ingredient).image})`,
-                      zIndex: 1000 - index
-                    }}
-                    >
-                      <p className={`${styles.ingredients_counter} text text_type_main-default`}>+{order.ingredients.slice(5).length}</p>
-                    </li>}                  
-                  </>
+                  >
+                    {index === maxVisibleElements && 
+                    <p className={`${styles.ingredients_counter} text text_type_main-default`}>
+                      +{order.ingredients.slice(maxVisibleElements).length}
+                    </p>}
+                  </li>              
                 );
-              }))
-            }
+              })}
           </ul>
           <div className={styles.sum}>
             <p className="text text_type_digits-default">
