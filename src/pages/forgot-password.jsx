@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useForm } from '../hooks/useForm';
 import { postPasswordReset } from '../utils/burger-api';
+import { PATH_LOGIN } from '../components/app/app';
 
 function ForgotPassword() {
   const navigate = useNavigate();
@@ -29,9 +30,9 @@ function ForgotPassword() {
         onChange={onChange}
       />
       <Button htmlType="submit" extraClass="mt-6">Восстановить</Button>
-      <p className="text text_type_main-default text_color_inactive mt-20">Вспомнили пароль?<Link to='/login' className={`${styles.link} ml-2`}>Войти</Link></p>
+      <p className="text text_type_main-default text_color_inactive mt-20">Вспомнили пароль?<Link to={PATH_LOGIN} className={`${styles.link} ml-2`}>Войти</Link></p>
     </form>
   );
-}
+};
 
 export default ForgotPassword;

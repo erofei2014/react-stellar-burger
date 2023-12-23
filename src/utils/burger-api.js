@@ -1,4 +1,6 @@
 const BASE_URL = 'https://norma.nomoreparties.space/api/';
+export const WS_URL_ALL_ORDERS = 'wss://norma.nomoreparties.space/orders/all';
+export const WS_URL_USER_ORDERS = 'wss://norma.nomoreparties.space/orders';
 
 const checkResponse = (res) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
@@ -51,17 +53,40 @@ export const fetchWithRefresh = async (endpoint, options) => {
   }
 };
 
+export const wsWithRefresh = async () => {
+  const refreshData = await refreshToken();
+  if (!refreshData.success) {
+    return Promise.reject(refreshData);
+  }
+
+  localStorage.setItem("refreshToken", refreshData.refreshToken);
+  localStorage.setItem("accessToken", refreshData.accessToken);
+
+  return `${WS_URL_USER_ORDERS}?token=${refreshData.accessToken.split(' ')[1]}`;
+};
+
 export const getIngredientsRequest = () => request('ingredients');
 
-export const getOrderNumberRequest = (orderElements) => request(
-  'orders',
-  {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      'token': localStorage.getItem("refreshToken"),
-      'ingredients': orderElements
-    })
+export const getOrderNumberRequest = (orderElements) => {
+  return fetchWithRefresh('orders',
+    {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem('accessToken')
+      },
+      body: JSON.stringify({
+        'ingredients': orderElements
+      })
+    }
+  );
+};
+
+export const getOrderInformationRequest = (orderNumber) => request(
+  `orders/${orderNumber}`,
+  { 
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' }
   }
 );
 

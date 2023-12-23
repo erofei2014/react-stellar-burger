@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useForm } from '../hooks/useForm';
 import { login } from '../services/actions/authentification';
+import { PATH_REGISTER, PATH_FORGOT_PASSWORD } from '../components/app/app';
+import { refreshToken } from '../utils/burger-api';
 
 function Login() {
   const dispatch = useDispatch();
@@ -32,8 +34,8 @@ function Login() {
         onChange={onChange}
       />
       <Button htmlType="submit" extraClass="mt-6">Войти</Button>
-      <p className="text text_type_main-default text_color_inactive mt-20">Вы — новый пользователь?<Link to='/register' className={`${styles.link} ml-2`}>Зарегистрироваться</Link></p>
-      <p className="text text_type_main-default text_color_inactive mt-4">Забыли пароль?<Link to='/forgot-password' className={`${styles.link} ml-2`}>Восстановить пароль</Link></p>
+      <p className="text text_type_main-default text_color_inactive mt-20">Вы — новый пользователь?<Link to={PATH_REGISTER} className={`${styles.link} ml-2`}>Зарегистрироваться</Link></p>
+      <p className="text text_type_main-default text_color_inactive mt-4">Забыли пароль?<Link to={PATH_FORGOT_PASSWORD} className={`${styles.link} ml-2`}>Восстановить пароль</Link></p>
     </form>
   );
 }

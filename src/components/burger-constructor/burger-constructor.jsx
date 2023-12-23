@@ -14,6 +14,7 @@ import { ADD_INGREDIENT, UPDATE_INGREDIENTS_LIST } from "../../services/actions/
 import bunImage from '../../../src/images/bun.png';
 import { getBurgerConstructor } from "../../services/selectors/burger-constructor";
 import { getAuthentification } from "../../services/selectors/authentification";
+import { PATH_LOGIN } from "../app/app";
 
 function BurgerConstructor() {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ function BurgerConstructor() {
     if (bun === null || !ingredients.length) {
       return;
     } else if (!user) {
-      navigate('/login');
+      navigate(PATH_LOGIN);
     } else {
       dispatch(getOrderNumber(compileOrder()));
       openModal();
@@ -128,7 +129,7 @@ function BurgerConstructor() {
       </ul>
       <div className={`${styles.payment} mt-10 mr-4`}>
         <div className={`${styles.sum} mr-10`}>
-          <p className="text text_type_digits-medium mr-2">{totalPrice}</p>
+          <p className="text text_type_digits-medium mr-2">{totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</p>
           <CurrencyIcon
             type="primary"
           />

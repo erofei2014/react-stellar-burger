@@ -14,9 +14,25 @@ import ProfileUpdate from "../../pages/profile/profile-update";
 import ProfileOrderHistory from "../../pages/profile/profile-order-history";
 import Ingredient from '../../pages/ingredient';
 import Modal from '../modal/modal';
+import OrderFeed from "../../pages/order-feed";
+import OrderInformation from "../../pages/order-information";
 import NotFound404 from '../../pages/not-found';
 import { OnlyAuth, OnlyUnAuth } from "../protected-route";
 import { checkUserAuth } from "../../services/actions/authentification";
+
+export const PATH_HOME = '/';
+export const PATH_LOGIN = '/login';
+export const PATH_REGISTER = '/register';
+export const PATH_FORGOT_PASSWORD = '/forgot-password';
+export const PATH_RESET_PASSWORD = '/reset-password';
+export const PATH_FEED = '/feed';
+export const PATH_FEED_ORDER = '/feed/:number';
+export const PATH_PROFILE = '/profile';
+export const PATH_PROFILE_FEED = 'orders';
+export const PATH_PROFILE_ORDER = '/profile/orders/:number';
+export const PATH_INGREDIENT_DETAILS = '/ingredients/:id';
+export const PATH_NOT_FOUND = '*';
+export const PATH_SAME_PAGE = '';
 
 function App() {
   const { ingredientsRequest } = useSelector(getBurgerIngredients);
@@ -40,26 +56,45 @@ function App() {
       {!ingredientsRequest &&
         <>
           <Routes location={background || location}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
-            <Route path="/register" element={<OnlyUnAuth component={<Register />} />} />
-            <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPassword />} />} />
-            <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPassword />} />} />
-            <Route path="/profile" element={<OnlyAuth component={<Profile />} />}>
-              <Route path="" element={<OnlyAuth component={<ProfileUpdate />} />} />
-              <Route path="orders" element={<OnlyAuth component={<ProfileOrderHistory />} />} />
+            <Route path={PATH_HOME} element={<HomePage />} />
+            <Route path={PATH_LOGIN} element={<OnlyUnAuth component={<Login />} />} />
+            <Route path={PATH_REGISTER} element={<OnlyUnAuth component={<Register />} />} />
+            <Route path={PATH_FORGOT_PASSWORD} element={<OnlyUnAuth component={<ForgotPassword />} />} />
+            <Route path={PATH_RESET_PASSWORD} element={<OnlyUnAuth component={<ResetPassword />} />} />
+            <Route path={PATH_FEED} element={<OrderFeed />} />
+            <Route path={PATH_FEED_ORDER} element={<OrderInformation />} />
+            <Route path={PATH_PROFILE} element={<OnlyAuth component={<Profile />} />}>
+              <Route path={PATH_SAME_PAGE} element={<OnlyAuth component={<ProfileUpdate />} />} />
+              <Route path={PATH_PROFILE_FEED} element={<OnlyAuth component={<ProfileOrderHistory />} />} />
             </Route>
-            <Route path="/ingredients/:id" element={<Ingredient />} />
-            <Route path="*" element={<NotFound404 />} />
+            <Route path={PATH_PROFILE_ORDER} element={<OnlyAuth component={<OrderInformation />} />} />
+            <Route path={PATH_INGREDIENT_DETAILS} element={<Ingredient />} />
+            <Route path={PATH_NOT_FOUND} element={<NotFound404 />} />
           </Routes>    
 
           {background && (
             <Routes>
               <Route
-                path="/ingredients/:id"
+                path={PATH_INGREDIENT_DETAILS}
                 element={
                   <Modal closeModal={handleModalClose}>
                     <Ingredient />
+                  </Modal>
+                }
+              />
+              <Route
+                path={PATH_FEED_ORDER}
+                element={
+                  <Modal closeModal={handleModalClose}>
+                    <OrderInformation />
+                  </Modal>
+                }
+              />
+              <Route
+                path={PATH_PROFILE_ORDER}
+                element={
+                  <Modal closeModal={handleModalClose}>
+                    <OnlyAuth component={<OrderInformation />} />
                   </Modal>
                 }
               />

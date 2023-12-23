@@ -4,6 +4,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useForm } from '../hooks/useForm';
 import { postNewPassword } from '../utils/burger-api';
+import { PATH_HOME, PATH_LOGIN } from '../components/app/app';
 
 function ResetPassword() {
   const navigate = useNavigate();
@@ -14,12 +15,12 @@ function ResetPassword() {
     postNewPassword(form)
       .then(res => {
         localStorage.removeItem("passwordIsRequested");
-        navigate('/login');
+        navigate(PATH_LOGIN);
       });
   });  
 
   if(!localStorage.getItem("passwordIsRequested")) {
-    return <Navigate to='/' />;
+    return <Navigate to={PATH_HOME} />;
   }
 
   return(

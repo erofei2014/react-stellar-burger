@@ -1,6 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import styles from "./app-header.module.css";
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { PATH_HOME, PATH_FEED, PATH_PROFILE } from '../app/app';
 
 function AppHeader() {
   return (
@@ -9,7 +10,7 @@ function AppHeader() {
         <ul className={styles.submenu}>
           <li className="pl-5 pr-5">
             <NavLink 
-              to="/"
+              to={PATH_HOME}
               className={styles.link}
             >
               {({isActive}) => (
@@ -28,7 +29,7 @@ function AppHeader() {
           </li>
           <li className={` pl-5 pr-5 ml-2`}>
             <NavLink 
-              to="/feed" 
+              to={PATH_FEED}
               className={styles.link}
             >
               {({isActive}) => (
@@ -47,13 +48,13 @@ function AppHeader() {
           </li>
         </ul>
         <Link 
-          to="/" 
+          to={PATH_HOME} 
           className={styles.logo}
         >
           <Logo />
         </Link>
         <NavLink 
-          to="/profile" 
+          to={PATH_PROFILE}
           className={`${styles.link} ${styles.personal} pl-5 pr-5`}
         >
           {({isActive}) => (

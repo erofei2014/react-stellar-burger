@@ -1,0 +1,1 @@
+export const getWsConnection = store => store.wsConnection;
