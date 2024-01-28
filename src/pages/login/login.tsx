@@ -1,12 +1,11 @@
 import React, { FormEvent } from 'react';
-import { useDispatch } from '../services/hooks';
-import styles from './user-auth-pages.module.css';
+import { useDispatch } from '../../services/hooks';
+import styles from './login.module.css';
 import { Link } from 'react-router-dom';
 import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useForm } from '../hooks/useForm';
-import { login } from '../services/actions/authentification';
-import { PATH_REGISTER, PATH_FORGOT_PASSWORD } from '../components/app/app';
-import { refreshToken } from '../utils/burger-api';
+import { useForm } from '../../hooks/useForm';
+import { login } from '../../services/actions/authentication';
+import { PATH_REGISTER, PATH_FORGOT_PASSWORD } from '../../components/app/app';
 
 function Login() {
   const dispatch = useDispatch();

@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './not-found.module.css';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { PATH_HOME } from '../components/app/app';
+import { PATH_HOME } from '../../components/app/app';
 
 function NotFound404() {
   const navigate = useNavigate();

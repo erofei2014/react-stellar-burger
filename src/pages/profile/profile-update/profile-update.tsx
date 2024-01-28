@@ -1,14 +1,14 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import { useDispatch, useSelector } from '../../services/hooks';
+import { useDispatch, useSelector } from '../../../services/hooks';
 import styles from './profile-update.module.css';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useForm } from '../../hooks/useForm';
-import { updateProfile } from '../../services/actions/authentification';
-import { getAuthentification } from '../../services/selectors/authentification';
+import { useForm } from '../../../hooks/useForm';
+import { updateProfile } from '../../../services/actions/authentication';
+import { getAuthentication } from '../../../services/selectors/authentication';
 
 function ProfileUpdate() {
   const dispatch = useDispatch();
-  const { user } = useSelector(getAuthentification);
+  const { user } = useSelector(getAuthentication);
 
   const { form, setValue, onChange } = useForm(user ? {name: user.name, email: user.email, password: ''} : {name: '', emal: '', password: ''});
 

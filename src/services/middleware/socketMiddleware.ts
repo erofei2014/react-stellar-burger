@@ -1,4 +1,5 @@
 import { wsWithRefresh } from "../../utils/burger-api";
+import { Middleware } from "redux";
 
 type TMiddlewareActions = {
   wsInit: string;
@@ -9,9 +10,7 @@ type TMiddlewareActions = {
   onGetOrders: string;
 };
 
-export type TMiddleware = (wsActions: TMiddlewareActions) => (store: any) => (next: any) => (action: any) => void
-
-export const socketMiddleware: TMiddleware = (wsActions) => {
+export const socketMiddleware = (wsActions: TMiddlewareActions): Middleware => {
   return store => {
     let socket: WebSocket;
     let isWsConnected = false;

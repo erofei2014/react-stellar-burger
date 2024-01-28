@@ -1,5 +1,3 @@
-import { type ReactNode } from 'react';
-
 export type TIngredient = {
   _id: string;
   name: string;
@@ -32,13 +30,11 @@ export type TOrder = {
   name: string,
   createdAt: string,
   updatedAt: string
-}
+};
+
+export type TUserNewOrder = string[];
 
 export type TUser = {
   email: string,
   name: string
-};
-
-export type ChildrenProps = {
-  children?: ReactNode;
 };

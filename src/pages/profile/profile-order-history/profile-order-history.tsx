@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from '../../services/hooks';
-import { getWsConnection } from '../../services/selectors/ws-selector';
-import Feed from '../../components/feed/feed';
-import { USER_ORDERS_WS_CONNECTION_START, USER_ORDERS_WS_CONNECTION_CLOSE, userOrdersWsGetOrders } from '../../services/actions/wsActions';
-import Loader from '../../components/loader/loader';
-import { WS_URL_USER_ORDERS } from '../../utils/burger-api';
+import { useSelector, useDispatch } from '../../../services/hooks';
+import { getWsConnection } from '../../../services/selectors/ws-selector';
+import Feed from '../../../components/feed/feed';
+import { USER_ORDERS_WS_CONNECTION_START, USER_ORDERS_WS_CONNECTION_CLOSE, userOrdersWsGetOrders } from '../../../services/actions/wsActions';
+import Loader from '../../../components/loader/loader';
+import { WS_URL_USER_ORDERS } from '../../../utils/burger-api';
 
 
 function ProfileOrderHistory() {

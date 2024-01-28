@@ -73,8 +73,8 @@ const OrderCard: FC<TOrderCard> = ({ order }: TOrderCard) => {
         <FormattedDate date={new Date(order.createdAt)} className='text text_type_main-default text_color_inactive' />
         <div className={styles.sum}>
           <p className='text text_type_digits-default'>
-            {order.ingredients.reduce((prevVal: any, ingredient) => {
-                prevVal = prevVal + ingredients?.find(item => item._id === ingredient)?.price;
+            {order.ingredients.reduce((prevVal, ingredient) => {
+                prevVal = prevVal + ingredients?.find(item => item._id === ingredient)?.price!;
                 return prevVal;
               }, 0)}
           </p>

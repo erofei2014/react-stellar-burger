@@ -1,10 +1,10 @@
-import React, { useCallback, FormEvent } from 'react';
-import styles from './user-auth-pages.module.css';
+import React, { FormEvent } from 'react';
+import styles from './forgot-password.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useForm } from '../hooks/useForm';
-import { postPasswordReset } from '../utils/burger-api';
-import { PATH_LOGIN } from '../components/app/app';
+import { useForm } from '../../hooks/useForm';
+import { postPasswordReset } from '../../utils/burger-api';
+import { PATH_LOGIN } from '../../components/app/app';
 
 function ForgotPassword() {
   const navigate = useNavigate();

@@ -1,22 +1,22 @@
 import {
   SET_USER,
   SET_AUTH_CHECKED
-} from '../actions/authentification';
+} from '../actions/authentication';
 import { TUser } from '../types/types';
-import { TAuthentificationActions } from '../actions/authentification';
+import { TAuthenticationActions } from '../actions/authentication';
 
 
-export type TAuthentificationState = {
+export type TAuthenticationState = {
   user: null | TUser;
   isAuthChecked: boolean;
 };
 
-const initialState: TAuthentificationState = {
+const initialState: TAuthenticationState = {
   user: null,
   isAuthChecked: false
 }
 
-export const authentificationReducer = (state = initialState, action: TAuthentificationActions): TAuthentificationState => {
+export const authenticationReducer = (state = initialState, action: TAuthenticationActions): TAuthenticationState => {
   switch (action.type) {
     case SET_USER:
       return {

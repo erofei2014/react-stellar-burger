@@ -1,8 +1,7 @@
-import React, { FC} from 'react';
+import React, { ReactNode} from 'react';
 import styles from './loader.module.css';
-import { ChildrenProps } from '../../services/types/types';
 
-function Loader({ children }: ChildrenProps) {
+function Loader({ children }: {children: ReactNode}) {
   return (
     <div className={styles.loader}>
       {children}

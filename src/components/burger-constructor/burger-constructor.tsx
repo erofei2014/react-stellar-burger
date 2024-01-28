@@ -13,7 +13,7 @@ import { getOrderNumber } from "../../services/actions/order-details";
 import { ADD_INGREDIENT, UPDATE_INGREDIENTS_LIST } from "../../services/actions/burger-constructor";
 import bunImage from '../../../src/images/bun.png';
 import { getBurgerConstructor } from "../../services/selectors/burger-constructor";
-import { getAuthentification } from "../../services/selectors/authentification";
+import { getAuthentication } from "../../services/selectors/authentication";
 import { PATH_LOGIN } from "../app/app";
 import { TIngredientWithId } from "../../services/types/types";
 
@@ -22,7 +22,7 @@ function BurgerConstructor() {
   const uuid = uuidv4();
   const dispatch = useDispatch();
   const { bun, ingredients } = useSelector(getBurgerConstructor);
-  const { user } = useSelector(getAuthentification);
+  const { user } = useSelector(getAuthentication);
 
   const { isModalOpen, openModal, closeModal } = useModal();
 

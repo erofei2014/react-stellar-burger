@@ -1,6 +1,6 @@
 import { useSelector } from '../services/hooks';
-import { Navigate, RouteProps, useLocation } from "react-router-dom";
-import { getAuthentification } from "../services/selectors/authentification";
+import { Navigate, useLocation } from "react-router-dom";
+import { getAuthentication } from "../services/selectors/authentication";
 import { PATH_LOGIN, PATH_HOME } from './app/app';
 import { FC, ReactNode } from 'react';
 
@@ -10,7 +10,7 @@ export type TProtected = {
 };
 
 const Protected: FC<TProtected> = ({ onlyUnAuth = false, component }): any => {
-  const { isAuthChecked, user } = useSelector(getAuthentification);
+  const { isAuthChecked, user } = useSelector(getAuthentication);
   const location = useLocation();
 
   if(!isAuthChecked) {

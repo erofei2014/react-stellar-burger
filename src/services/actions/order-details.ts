@@ -1,7 +1,7 @@
 import { getOrderNumberRequest, getOrderInformationRequest } from "../../utils/burger-api";
 import { DELETE_INGREDIENTS_LIST } from "./burger-constructor";
 import { AppDispatch, AppThunk } from "../types";
-import { TOrder } from "../types/types";
+import { TIngredient, TOrder, TUserNewOrder } from "../types/types";
 
 export const GET_ORDER_NUMBER_REQUEST = 'GET_ORDER_NUMBER_REQUEST';
 export const GET_ORDER_NUMBER_SUCCESS = 'GET_ORDER_NUMBER_SUCCESS';
@@ -44,7 +44,7 @@ export type TGetOrderInformationFailedAction = {
   readonly type: typeof GET_ORDER_INFORMATION_FAILED;
 };
 
-export const getOrderNumber: AppThunk = (orderElements: any[]) => {
+export const getOrderNumber: AppThunk = (orderElements: TUserNewOrder[]) => {
   return function(dispatch: AppDispatch) {
     dispatch({
       type: GET_ORDER_NUMBER_REQUEST

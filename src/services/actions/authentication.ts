@@ -5,7 +5,7 @@ import { TUser } from "../types/types";
 export const SET_USER = 'SET_USER';
 export const SET_AUTH_CHECKED = 'SET_AUTH_CHECKED';
 
-export type TAuthentificationActions = 
+export type TAuthenticationActions = 
   | TSetUserAction
   | TSetAuthChecked;
 

@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo } from 'react';
-import { useDispatch } from '../services/hooks';
+import { useDispatch } from '../../services/hooks';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import OrderCard from '../components/order-card/order-card';
-import { getOrderInformation } from '../services/actions/order-details';
-import { getWsConnection } from '../services/selectors/ws-selector';
-import { getOrderDetails } from '../services/selectors/order-details';
-import Loader from '../components/loader/loader';
+import OrderCard from '../../components/order-card/order-card';
+import { getOrderInformation } from '../../services/actions/order-details';
+import { getWsConnection } from '../../services/selectors/ws-selector';
+import { getOrderDetails } from '../../services/selectors/order-details';
+import Loader from '../../components/loader/loader';
 
 function OrderInformation() {
   const dispatch = useDispatch();

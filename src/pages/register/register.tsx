@@ -1,11 +1,11 @@
-import React, { useCallback, FormEvent } from 'react';
-import { useDispatch } from '../services/hooks';
-import styles from './user-auth-pages.module.css';
+import React, { FormEvent } from 'react';
+import { useDispatch } from '../../services/hooks';
+import styles from './register.module.css';
 import { Link } from 'react-router-dom';
 import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useForm } from '../hooks/useForm';
-import { registerNewUser } from '../services/actions/authentification';
-import { PATH_LOGIN } from '../components/app/app';
+import { useForm } from '../../hooks/useForm';
+import { registerNewUser } from '../../services/actions/authentication';
+import { PATH_LOGIN } from '../../components/app/app';
 
 function Register() {
   const dispatch = useDispatch();

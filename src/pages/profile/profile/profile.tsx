@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
-import { useDispatch } from '../../services/hooks';
+import { useDispatch } from '../../../services/hooks';
 import styles from './profile.module.css';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
-import { logout } from '../../services/actions/authentification';
-import { PATH_PROFILE, PATH_PROFILE_FEED } from '../../components/app/app';
+import { logout } from '../../../services/actions/authentication';
+import { PATH_PROFILE, PATH_PROFILE_FEED } from '../../../components/app/app';
 
 function Profile() {
   const dispatch = useDispatch();

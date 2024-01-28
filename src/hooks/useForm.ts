@@ -4,13 +4,13 @@ type TInputValues = {
   [key: string]: string;
 };
 
-type TUseForm = {
-  form: TInputValues;
-  setValue: (form:{}) => void;
+type TUseForm<T> = {
+  form: T;
+  setValue: (form:T) => void;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const useForm = (inputform: TInputValues = {}): TUseForm => {
+export const useForm = <T extends TInputValues>(inputform: T): TUseForm<T> => {
   const [form, setValue] = useState(inputform);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {

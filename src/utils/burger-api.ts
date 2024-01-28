@@ -1,8 +1,17 @@
-import { TIngredient, TOrder } from "../services/types/types";
+import { TIngredient, TOrder, TUserNewOrder } from "../services/types/types";
 
 const BASE_URL = 'https://norma.nomoreparties.space/api/';
 export const WS_URL_ALL_ORDERS = 'wss://norma.nomoreparties.space/orders/all';
 export const WS_URL_USER_ORDERS = 'wss://norma.nomoreparties.space/orders';
+
+type TOptions = {
+  method?: string;
+  headers: {
+    'Content-Type': string;
+    authorization: string;
+  };
+  body?: BodyInit;
+};
 
 type TServerResponse<T> = T & {
   success: boolean;
@@ -46,7 +55,7 @@ const checkSuccess = <T>(res: TServerResponse<T>): Promise<T> | T => {
   return Promise.reject(`Ответ не success: ${res}`);
 };
 
-const request = <T>(endpoint: string, options?: {}): Promise<T> => {
+const request = <T>(endpoint: string, options?: RequestInit): Promise<T> => {
   return fetch(`${BASE_URL}${endpoint}`, options)
     .then(checkResponse)
     .then(checkSuccess<T>);
@@ -65,7 +74,7 @@ export const refreshToken = (): Promise<TRefreshToken> => request(
   }
 );
 
-export const fetchWithRefresh = async <T>(endpoint: string, options: {[key: string]: any}): Promise<T> => {
+export const fetchWithRefresh = async <T>(endpoint: string, options: TOptions): Promise<T> => {
   try {
     const res = await fetch(`${BASE_URL}${endpoint}`, options);
     return await checkResponse(res);
@@ -100,13 +109,13 @@ export const wsWithRefresh = async () => {
 
 export const getIngredientsRequest = (): Promise<TGetIngredients> => request('ingredients');
 
-export const getOrderNumberRequest = (orderElements: TOrder[]): Promise<TGetOrder> => {
+export const getOrderNumberRequest = (orderElements: TUserNewOrder[]): Promise<TGetOrder> => {
   return fetchWithRefresh('orders',
     {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',
-        authorization: localStorage.getItem('accessToken')
+        authorization: localStorage.getItem('accessToken')!
       },
       body: JSON.stringify({
         'ingredients': orderElements
@@ -187,7 +196,7 @@ export const getUserInfo = (): Promise<TGetUser> => {
   {
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
-      authorization: localStorage.getItem('accessToken')
+      authorization: localStorage.getItem('accessToken')!
     }
   });
 };
@@ -198,7 +207,7 @@ export const postUpdatedUserInfo = (name: string, email: string, password: strin
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
-      authorization: localStorage.getItem('accessToken')
+      authorization: localStorage.getItem('accessToken')!
     },
     body: JSON.stringify({
       'name': name,

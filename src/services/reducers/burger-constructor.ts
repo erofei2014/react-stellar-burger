@@ -9,7 +9,7 @@ import { TIngredientWithId } from '../types/types';
 
 export type TBurgerConstructorState = {
   bun: null | TIngredientWithId;
-  ingredients: TIngredientWithId[] | [];
+  ingredients: TIngredientWithId[];
 };
 
 const initialState: TBurgerConstructorState = {

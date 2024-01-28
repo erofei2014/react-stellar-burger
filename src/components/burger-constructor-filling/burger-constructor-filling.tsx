@@ -1,6 +1,6 @@
 import React, { useRef, FC } from 'react';
 import { useDispatch } from '../../services/hooks';
-import { useDrag, useDrop } from 'react-dnd';
+import { DropTargetMonitor, useDrag, useDrop } from 'react-dnd';
 import styles from "./burger-constructor-filling.module.css";
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { DELETE_INGREDIENT } from '../../services/actions/burger-constructor';
@@ -13,7 +13,7 @@ export type BurgerConstructorFillingProps = {
 };
 
 const BurgerConstructorFilling: FC<BurgerConstructorFillingProps> = ({ ingredient, moveCard, index }) => {
-  const ref: any = useRef(null);
+  const ref = useRef<null | HTMLLIElement>(null);
   const dispatch = useDispatch();
 
   const removeIngredient = (ingredient: TIngredientWithId) => {
@@ -39,7 +39,7 @@ const BurgerConstructorFilling: FC<BurgerConstructorFillingProps> = ({ ingredien
     collect: monitor => ({
       handlerId: monitor.getHandlerId()
     }),
-    hover(ingredient: TIngredientWithIndex, monitor: any) {
+    hover(ingredient: TIngredientWithIndex, monitor: DropTargetMonitor<unknown, unknown>) {
       if (!ref.current) {
         return
       }
@@ -50,7 +50,7 @@ const BurgerConstructorFilling: FC<BurgerConstructorFillingProps> = ({ ingredien
       }
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
       const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-      const clientOffset = monitor.getClientOffset();
+      const clientOffset = monitor.getClientOffset()!;
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return

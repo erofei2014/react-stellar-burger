@@ -1,9 +1,9 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { useSelector } from '../services/hooks';
+import { useSelector } from '../../services/hooks';
 import { useParams } from 'react-router-dom';
-import IngredientDetails from '../components/ingredient-details/ingredient-details';
-import { getBurgerIngredients } from '../services/selectors/burger-ingredients';
-import { TIngredient } from '../services/types/types';
+import IngredientDetails from '../../components/ingredient-details/ingredient-details';
+import { getBurgerIngredients } from '../../services/selectors/burger-ingredients';
+import { TIngredient } from '../../services/types/types';
 
 function Ingredient() {
   const { id } = useParams();

@@ -1,13 +1,12 @@
-import React, { FC, useCallback } from "react";
+import React, { FC, PropsWithChildren, useCallback } from "react";
 import PropTypes from 'prop-types';
 import ReactDOM from "react-dom";
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ModalOverlay from "../modal-overlay/modal-overlay";
 import styles from './modal.module.css';
 import { TModalOverlay } from "../modal-overlay/modal-overlay";
-import { ChildrenProps } from "../../services/types/types";
 
-export type TModal = TModalOverlay & ChildrenProps;
+export type TModal = PropsWithChildren<TModalOverlay>;
 
 const modalRoot = document.getElementById('react-modals');
 
